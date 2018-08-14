@@ -1,0 +1,23 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-6.10
+
+suites:
+  - name: default
+    run_list:
+      - recipe[yum_test::default]
+    verifier:
+      inspec_tests:
+        - test/recipes
+    attributes:
